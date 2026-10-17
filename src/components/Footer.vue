@@ -1,0 +1,253 @@
+
+<script setup lang="ts">
+import { nextTick } from "vue";
+import Social from "./Social.vue";
+import Clickable from "./Clickable.vue";
+import LangSwitch from "./LangSwitch.vue";
+import NotchSection from "./NotchSection.vue";
+import { t } from "../i18n/utils/translate";
+import ButtonRound from "./ButtonRound.vue";
+import { lenis } from "../composables/useScroll";
+import { projectId } from "../composables/useRouteObserver";
+import { useRouter } from "../composables/useRouter";
+import { ROUTE_TRANSITION_DURATION } from "../composables/useProjectTransition";
+import ArrowRightLong from "./icons/ArrowRightLong.vue";
+
+interface Props {
+  withSocial?: boolean;
+}
+
+const { withSocial = true } = defineProps<Props>();
+
+const router = useRouter();
+
+const handleBackToTop = () => {
+  if (!lenis.value) return;
+  lenis.value.scrollTo(0);
+};
+
+const scrollToSection = async (
+  sectionId: "about" | "projects" | "contact"
+) => {
+  // From a project details page, return to the homepage first.
+  if (projectId.value !== null) {
+    router.push("/");
+
+    // Allow the existing route transition to finish.
+    await new Promise<void>((resolve) => {
+      window.setTimeout(resolve, ROUTE_TRANSITION_DURATION + 100);
+    });
+  }
+
+  await nextTick();
+
+  const target = document.getElementById(sectionId);
+
+  if (!target) {
+    console.warn(`Footer section not found: #${sectionId}`);
+    return;
+  }
+
+  if (lenis.value) {
+    lenis.value.scrollTo(target, {
+      duration: 1.2,
+      offset: 0,
+    });
+  } else {
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+};
+</script>
+
+<template>
+  <footer class="footer">
+    <NotchSection class="footer-notch" />
+
+    <div class="footer-content">
+      <div
+        class="footer-back-to-top"
+        tabindex="0"
+        role="button"
+        aria-label="Back to top"
+        @click="handleBackToTop"
+        @keydown.enter="handleBackToTop"
+        data-cursor="circle-white"
+        data-sound="click"
+      >
+        <ButtonRound
+          renderAs="div"
+          variant="border"
+          class="children-unclickable"
+          data-hoversound="hover"
+        >
+          <ArrowRightLong class="footer-back-to-top-icon" />
+        </ButtonRound>
+      </div>
+
+      <div class="footer-top">
+        <Social v-if="withSocial" />
+
+        <div class="footer-top-links">
+         
+<div class="footer-top-links-legal">
+  <Clickable renderAs="div">
+    <a
+      href="#about"
+      class="footer-link"
+      @click.prevent="scrollToSection('about')"
+      data-cursor="circle-white"
+      data-sound="click"
+      data-hoversound="hover"
+    >
+      {{ t("about") }}
+    </a>
+  </Clickable>
+
+  <Clickable renderAs="div">
+    <a
+      href="#projects"
+      class="footer-link"
+      @click.prevent="scrollToSection('projects')"
+      data-cursor="circle-white"
+      data-sound="click"
+      data-hoversound="hover"
+    >
+      {{ t("projects") }}
+    </a>
+  </Clickable>
+
+  <Clickable renderAs="div">
+    <a
+      href="#contact"
+      class="footer-link"
+      @click.prevent="scrollToSection('contact')"
+      data-cursor="circle-white"
+      data-sound="click"
+      data-hoversound="hover"
+    >
+      {{ t("contact") }}
+    </a>
+  </Clickable>
+</div>
+          <LangSwitch />
+        </div>
+      </div>
+
+      <div class="footer-credits">
+        <p>© {{ new Date().getFullYear() }} Durva Goswami</p>
+        
+<p class="footer-credits-original">
+  "Where creativity meets code."
+</p>
+
+      </div>
+    </div>
+  </footer>
+</template>
+
+<style scoped lang="scss">
+.footer {
+  background: var(--color-background-300, var(--color-beige-400));
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding-bottom: max(var(--space-xs), var(--safe-bottom));
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+    width: 100%;
+    max-width: min(100%, var(--breakpoint-xxxl));
+    padding: calc(var(--space-outer) + var(--space-sm)) var(--space-outer);
+    position: relative;
+  }
+
+  &-back-to-top {
+    cursor: pointer;
+
+    @include mixins.mq("md") {
+      position: absolute;
+      top: calc(var(--space-outer) + var(--space-sm));
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &-icon {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &-top {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+
+    @include mixins.mq("md") {
+      gap: var(--space-md);
+      flex-direction: row;
+    }
+
+    &-links {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: var(--space-md);
+
+      &-legal {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-md);
+      }
+
+      @include mixins.mq("md") {
+        gap: var(--space-lg);
+        flex-direction: row;
+        position: relative;
+        margin-left: auto;
+      }
+    }
+  }
+
+  &-link {
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  &-credits {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    width: 100%;
+    font-size: var(--font-size-sm);
+    text-align: center;
+
+    &-built,
+    &-music {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-xxs);
+    }
+  }
+
+  &-notch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    color: var(--color-background-300, var(--color-beige-400));
+    --icon-color: var(--color-background-300, var(--color-beige-400));
+  }
+}
+</style>

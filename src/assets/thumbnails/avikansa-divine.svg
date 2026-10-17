@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Avikansa Divine</title>
+  <desc id="desc">Wellness and spiritual services website project</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4e3c53"/>
+      <stop offset="1" stop-color="#bd806b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <circle cx="985" cy="370" r="240" fill="#f4ddbd" opacity=".12"/>
+  <circle cx="985" cy="370" r="165" fill="none" stroke="#f4ddbd" stroke-width="2" opacity=".65"/>
+  <path d="M985 205c70 85 70 245 0 330-70-85-70-245 0-330Zm-165 165c85-70 245-70 330 0-85 70-245 70-330 0Z" fill="none" stroke="#f4ddbd" stroke-width="4" opacity=".7"/>
+  <text x="90" y="125" fill="#f4ddbd" font-family="Arial,sans-serif" font-size="30" font-weight="700" letter-spacing="8">WORDPRESS PROJECT</text>
+  <text x="90" y="345" fill="#fff6e8" font-family="Georgia,serif" font-size="95" font-weight="700">Avikansa</text>
+  <text x="95" y="445" fill="#fff6e8" font-family="Georgia,serif" font-size="95">Divine</text>
+  <path d="M95 490h390" stroke="#f4ddbd" stroke-width="6"/>
+  <text x="95" y="565" fill="#f9e8d8" font-family="Arial,sans-serif" font-size="36">Wellness &amp; Spiritual</text>
+  <text x="95" y="710" fill="#fff6e8" font-family="Arial,sans-serif" font-size="28" font-weight="700" letter-spacing="4">CALM, USER-FRIENDLY DESIGN</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">BFM Times</title>
+  <desc id="desc">Editorial news and magazine website project</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102b46"/>
+      <stop offset="1" stop-color="#176c83"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <path d="M0 620h1200v180H0z" fill="#f3eee4"/>
+  <circle cx="1000" cy="180" r="240" fill="#ffffff" opacity=".06"/>
+  <text x="90" y="125" fill="#b6e3df" font-family="Arial,sans-serif" font-size="30" font-weight="700" letter-spacing="8">WORDPRESS PROJECT</text>
+  <text x="90" y="365" fill="#fffaf0" font-family="Georgia,serif" font-size="126" font-weight="700">BFM Times</text>
+  <path d="M95 415h530" stroke="#e7b467" stroke-width="8"/>
+  <text x="95" y="500" fill="#e2edf0" font-family="Arial,sans-serif" font-size="40">News &amp; Magazine</text>
+  <text x="95" y="710" fill="#17334b" font-family="Arial,sans-serif" font-size="30" font-weight="700" letter-spacing="5">RESPONSIVE EDITORIAL EXPERIENCE</text>
+</svg>
